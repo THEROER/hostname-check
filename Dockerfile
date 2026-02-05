@@ -2,10 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir litestar uvicorn
-
 COPY app.py /app/app.py
 
 EXPOSE 3000
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "3000"]
+ENV LISTEN_HOST=0.0.0.0 \
+    LISTEN_PORT=3000
+
+CMD ["python", "-u", "app.py"]
